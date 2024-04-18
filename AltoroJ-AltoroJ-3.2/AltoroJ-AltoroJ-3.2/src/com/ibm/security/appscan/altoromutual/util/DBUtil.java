@@ -225,6 +225,17 @@ public class DBUtil {
 		}
 		return false;
 	}
+	// added method to check if user exists
+	public static boolean userExists(String username) throws SQLException {
+    Connection connection = getConnection();
+    Statement statement = connection.createStatement();
+    ResultSet resultSet = statement.executeQuery("SELECT COUNT(*) FROM PEOPLE WHERE USER_ID = '" + username + "'");
+    if (resultSet.next()) {
+        return resultSet.getInt(1) > 0;
+    }
+    return false;
+}
+
 	
 
 	/**
